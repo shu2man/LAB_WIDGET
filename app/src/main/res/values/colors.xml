@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="forcircle">#56a2ce</color>
+    <color name="circlewhite">#ffffff</color>
+    <color name="mytransparent">#00ffffff</color>
+    <color name="backgroundgray">#e1e1e1</color>
+    <color name="realDark">#090000</color>
+    <color name="grayfordetailshow">#8A000000</color>
+    <color name="normalgray">#3e3f41</color>
+</resources>
