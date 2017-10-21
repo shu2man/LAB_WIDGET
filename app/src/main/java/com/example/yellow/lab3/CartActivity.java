@@ -9,12 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.View.OnLongClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +43,27 @@ public class CartActivity extends AppCompatActivity{
         setContentView(R.layout.cart_page);
         initData();
         //mListView=(ListView) findViewById(R.id.cart_listview);
-
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView tv=(TextView)view.findViewById(R.id.cartlistname);
+                Toast.makeText(getApplicationContext(),tv.getText(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        /*mListView.setOnLongClickListener(new AdapterView<?>.OnLongClickListener(){
+            public boolean onItemLongClick(AdapterView<?> arg0,View arg1,int arg2,long arg3){
+                TextView tv=(TextView) arg1.findViewById(R.id.cartlistprice);
+                Toast.makeText(getApplicationContext(), "价格： "+tv.getText(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });*/
+        mListView.setOnLongClickListener(new View.OnLongClickListener(){
+            public boolean onLongClick(View view){
+                TextView tv=(TextView) view.findViewById(R.id.cartlistprice);
+                Toast.makeText(getApplicationContext(), "价格： "+tv.getText(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 
     public void initData(){

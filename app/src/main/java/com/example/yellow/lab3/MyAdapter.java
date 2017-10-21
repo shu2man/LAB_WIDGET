@@ -102,7 +102,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
                 public boolean onLongClick(View v){
                     int position=holder.getLayoutPosition();
                     mOnItemLongClickListener.onItemLongClick(holder.itemView,position);
-                    return true;//返回true 表示消耗了事件 事件不会继续传递
+                    return true;//返回true 表示消耗了事件，若为false则还将执行短按click事件
                 }
             });
         }
