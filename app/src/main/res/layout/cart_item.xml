@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/title_cart_and_price"
+    android:layout_width="0dp"
+    android:layout_height="90dp"
+    android:orientation="horizontal"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+        android:id="@+id/cartlistcircle"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:text="*"
+        android:textSize="30sp"
+        android:textColor="@color/circlewhite"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp" />
+    <TextView
+        android:id="@+id/cartlistname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="购物车"
+        android:textSize="22sp"
+        app:layout_constraintLeft_toRightOf="@+id/cartlistcircle"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="14dp" />
+    <TextView
+        android:id="@+id/cartlistprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="价格"
+        android:textSize="22sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="30dp"/>
+
+</android.support.constraint.ConstraintLayout>

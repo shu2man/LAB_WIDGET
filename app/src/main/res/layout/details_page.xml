@@ -23,8 +23,9 @@
             android:background="@drawable/back"
             android:layout_alignTop="@id/goods_image"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp"
+            android:onClick="backToRecyclerView"
             />
         <ImageButton
             android:id="@+id/detail_page_favorite"
@@ -74,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="重量 300g"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/grayfordetailshow"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
@@ -111,10 +112,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/empty_blank_gray"
-        android:divider="@color/backgroundgray"
-        android:dividerHeight="1dp">
-
-
+        android:divider="@drawable/divider_line"
+        android:dividerHeight="1dp"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/item_background">
     </ListView>
 
 </RelativeLayout>

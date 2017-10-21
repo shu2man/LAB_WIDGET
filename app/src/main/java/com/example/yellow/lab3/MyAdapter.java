@@ -39,14 +39,14 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     private int favorflag;
     private Context mcontext;
 
-    /*public interface OnItemClickListener{
+    public interface OnItemClickListener{
         void onItemClick(View view,int position);
     }
     public interface OnItemLongClickListener{
         void onItemLongClick(View view,int position);
     }
     private OnItemClickListener mOnItemClickListener;
-    private OnItemLongClickListener mOnItemLongClickListener;*/
+    private OnItemLongClickListener mOnItemLongClickListener;
 
     MyAdapter(Context mcontext){
         this.mcontext=mcontext;
@@ -58,7 +58,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         Type=new ArrayList<String>();
         Details=new ArrayList<String>();
         isfavorite=new ArrayList<Boolean>();
-        String[] name={"Enchated Forest","Arla Milk","Devondale Milk","Kindle Oasis","waitrose 早餐麦片",
+        String[] name={"Enchated Forest","Arla Milk","Devondale Milk","Kindle Oasis","Waitrose 早餐麦片",
                 "Mcvitie's 饼干","Ferrero Rocher","Maltesers","Lindt","Borggreve"};
         String[] price={"¥5.00","¥59.00","¥79.00","¥2399.00","¥179.00","¥14.90","¥132.59","¥141.43","¥139.43","¥28.90"};
         String[] type={"作者","产地","版本","版本","重量","重量","重量","重量","重量","重量"};
@@ -84,7 +84,8 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         holder.title.setText(Name.get(position));
         holder.iconletter.setText(Name.get(position).substring(0,1));
-        /*if(mOnItemClickListener!=null){
+        //点击事件
+        if(mOnItemClickListener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 //为ItemView设置监听器
                 @Override
@@ -94,6 +95,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
                 }
             });
         }
+        //长按事件
         if(mOnItemLongClickListener!=null){
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
                 @Override
@@ -103,7 +105,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
                     return true;//返回true 表示消耗了事件 事件不会继续传递
                 }
             });
-        }*/
+        }
     }
 
     //得到child的数量
@@ -115,6 +117,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView iconletter;
+        TextView goodprice;
         public MyViewHolder(View view) {
             super(view);
             title= (TextView) view.findViewById(R.id.goods_name);
@@ -122,11 +125,11 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         }
     }
 
-    /*public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
         this.mOnItemClickListener=mOnItemClickListener;
     }
     public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener){
         this.mOnItemLongClickListener=mOnItemLongClickListener;
-    }*/
+    }
 
 }
