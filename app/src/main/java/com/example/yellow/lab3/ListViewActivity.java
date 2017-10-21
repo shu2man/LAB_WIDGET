@@ -9,13 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListViewActivity extends Activity {
     private ListView listView=null;
-   private int favorflag=0;
+    private int favorflag=0;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -40,4 +41,10 @@ public class ListViewActivity extends Activity {
         if(favorflag%2 != 0) view.setBackgroundResource(R.drawable.full_star);
         else view.setBackgroundResource(R.drawable.empty_star);
     }
+    public void addToCart(View taget){
+        /*DataShare ds=new DataShare();
+        ds.addIncart("Empty Name");*/
+        Toast.makeText(ListViewActivity.this, "商品已添加到购物车", Toast.LENGTH_SHORT).show();
+    }
+
 }

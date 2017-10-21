@@ -32,11 +32,11 @@ import static android.R.id.list;
 
 class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     private List<String> Name;
-    private List<String> Price;
+    /*private List<String> Price;
     private List<String> Type;
     private List<String> Details;
     private List<Boolean> isfavorite;
-    private int favorflag;
+    private int favorflag;*/
     private Context mcontext;
 
     public interface OnItemClickListener{
@@ -48,34 +48,34 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     private OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
 
-    MyAdapter(Context mcontext){
-        this.mcontext=mcontext;
+    public MyAdapter(Context context){
+        this.mcontext=context;
         initData();
     }
-    protected void initData() {
+    private void initData() {
         Name=new ArrayList<String>();
-        Price=new ArrayList<String>();
+        /*Price=new ArrayList<String>();
         Type=new ArrayList<String>();
         Details=new ArrayList<String>();
-        isfavorite=new ArrayList<Boolean>();
+        isfavorite=new ArrayList<Boolean>();*/
         String[] name={"Enchated Forest","Arla Milk","Devondale Milk","Kindle Oasis","Waitrose 早餐麦片",
                 "Mcvitie's 饼干","Ferrero Rocher","Maltesers","Lindt","Borggreve"};
-        String[] price={"¥5.00","¥59.00","¥79.00","¥2399.00","¥179.00","¥14.90","¥132.59","¥141.43","¥139.43","¥28.90"};
+        /*String[] price={"¥5.00","¥59.00","¥79.00","¥2399.00","¥179.00","¥14.90","¥132.59","¥141.43","¥139.43","¥28.90"};
         String[] type={"作者","产地","版本","版本","重量","重量","重量","重量","重量","重量"};
         String[] details={"Johanna Basford","德国","澳大利亚","8GB","2Kg","英国","300","118g","249g","640g"};
-        favorflag=0;
+        favorflag=0;*/
         for(int i=0;i<10;i++){
             Name.add(name[i]);
-            Price.add(price[i]);
+            /*Price.add(price[i]);
             Type.add(type[i]);
             Details.add(details[i]);
-            isfavorite.add(false);
+            isfavorite.add(false);*/
         }
     }
     //创建ChildView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layout=LayoutInflater.from(mcontext).inflate(R.layout.list_item, parent, false);
+        View layout=LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
         return new MyViewHolder(layout);//from(this)
     }
 
@@ -117,15 +117,14 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView iconletter;
-        TextView goodprice;
-        public MyViewHolder(View view) {
+        private MyViewHolder(View view) {
             super(view);
             title= (TextView) view.findViewById(R.id.goods_name);
             iconletter=(TextView) view.findViewById(R.id.goods_icon_letter);
         }
     }
 
-    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
+   public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
         this.mOnItemClickListener=mOnItemClickListener;
     }
     public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener){

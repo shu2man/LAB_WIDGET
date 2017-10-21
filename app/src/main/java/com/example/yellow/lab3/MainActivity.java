@@ -18,21 +18,23 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
+
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView mRecyclerView;
+    /*private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
     private ListView mListView;
-    private List<String> mData = null;
+    private List<String> mData = null;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAdapter=new MyAdapter(this);
+        MyAdapter mAdapter=new MyAdapter(this);
         mAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                //Toast.makeText(MainActivity.this, "CLICK", Toast.LENGTH_SHORT).show();
                 Intent page=new Intent(MainActivity.this,ListViewActivity.class);
                 startActivity(page);
                 Toast.makeText(MainActivity.this, "CLICK", Toast.LENGTH_SHORT).show();
@@ -45,11 +47,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //动画
+        ScaleInAnimationAdapter animationAdapter=new ScaleInAnimationAdapter(mAdapter);
+        animationAdapter.setDuration(1000);
+        mRecyclerView.setAdapter(animationAdapter);
+        mRecyclerView.setItemAnimator(new OvershootInLeftAnimator());
+        //
         mRecyclerView.setAdapter(mAdapter);
+        //分割线
         mRecyclerView.addItemDecoration(new MyDecoration(this,MyDecoration.VERTICAL_LIST));
 
+    }
+
+   public void goToCart(View target){
+        Intent page=new Intent(MainActivity.this,CartActivity.class);
+        startActivity(page);
     }
 
 }
