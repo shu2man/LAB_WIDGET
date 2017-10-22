@@ -22,10 +22,6 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
 
 public class MainActivity extends AppCompatActivity {
-    /*private RecyclerView mRecyclerView;
-    private MyAdapter mAdapter;
-    private ListView mListView;
-    private List<String> mData = null;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                TextView tv=(TextView)view.findViewById(R.id.goods_name);
+                DataShare ds=((DataShare)getApplicationContext());
+                ds.setLastClick(tv.getText().toString());
+                ds.setLastPage("main");
                 Intent page=new Intent(MainActivity.this,ListViewActivity.class);
                 startActivity(page);
             }
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 ds.removeCurrentList(tv.getText().toString());
                 mAdapter.initData();
                 mAdapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(),"成功移除"+tv.getText(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"成功移除第"+position+"个商品 "+tv.getText(),Toast.LENGTH_SHORT).show();
             }
         });
 

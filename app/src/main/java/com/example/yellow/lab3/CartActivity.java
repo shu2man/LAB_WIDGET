@@ -50,6 +50,9 @@ public class CartActivity extends AppCompatActivity{
                 TextView tv=(TextView)view.findViewById(R.id.cartlistname);
                 //Toast.makeText(getApplicationContext(),tv.getText(),Toast.LENGTH_SHORT).show();
                 if(!tv.getText().toString().equals("        购物车空空如也~")) {
+                    DataShare ds=((DataShare)getApplicationContext());
+                    ds.setLastClick(tv.getText().toString());
+                    ds.setLastPage("cart");
                     Intent newpage = new Intent(CartActivity.this, ListViewActivity.class);
                     CartActivity.this.startActivity(newpage);
                 }
@@ -76,10 +79,10 @@ public class CartActivity extends AppCompatActivity{
                         DataShare ds=((DataShare)getApplicationContext());
                         ds.removeIncart(tv.getText().toString());
                         initData();
-                        adapter.notifyDataSetChanged();
                         Toast.makeText(getApplicationContext(),"商品"+tv.getText()+"移除成功",Toast.LENGTH_SHORT).show();
                     }
                 });
+                builder.show();
                 return true;
             }
         });
