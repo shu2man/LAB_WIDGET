@@ -50,21 +50,18 @@ public class DataShare extends Application{
     public List<String> getDetails(){
         return Details;
     }
-    public Boolean isfavor(String name){
-        return Favor.contains(name);
-
-    }
     public List<String> getCurrentList() {
         return CurrentList;
     }
     public List<String> getIncart() {
         return Incart;
     }
+    public Boolean isFavor(String name){ return Favor.contains(name);}
 
-    public void eraseCurrentList(String name){
+    public void removeCurrentList(String name){
         if(CurrentList.contains(name)) CurrentList.remove(name);
     }
-    public void setfavor(String name) {
+    public void setFavor(String name) {
         if(Favor.contains(name)) Favor.remove(name);
         else Favor.add(name);
     }
@@ -72,4 +69,5 @@ public class DataShare extends Application{
     public void addIncart(String name) {
         if(!Incart.contains(name)) Incart.add(name);
     }
+    public void removeIncart(String name){if(Incart.contains(name)) Incart.remove(name);}
 }

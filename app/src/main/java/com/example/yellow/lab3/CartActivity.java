@@ -1,7 +1,9 @@
 package com.example.yellow.lab3;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,10 +33,10 @@ import java.util.StringTokenizer;
 
 public class CartActivity extends AppCompatActivity{
     private ListView mListView=null;
-    /*private MyAdapter mAdapter;
+    private SimpleAdapter adapter=null;
     private List<String> Name=null;
     private List<String> Price=null;
-    private List<String> Iconletter=null;*/
+    private List<String> Iconletter=null;
 
 
     @Override
@@ -42,32 +44,78 @@ public class CartActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_page);
         initData();
-        //mListView=(ListView) findViewById(R.id.cart_listview);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView tv=(TextView)view.findViewById(R.id.cartlistname);
-                Toast.makeText(getApplicationContext(),tv.getText(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),tv.getText(),Toast.LENGTH_SHORT).show();
+                if(!tv.getText().toString().equals("        购物车空空如也~")) {
+                    Intent newpage = new Intent(CartActivity.this, ListViewActivity.class);
+                    CartActivity.this.startActivity(newpage);
+                }
             }
         });
-        /*mListView.setOnLongClickListener(new AdapterView<?>.OnLongClickListener(){
-            public boolean onItemLongClick(AdapterView<?> arg0,View arg1,int arg2,long arg3){
-                TextView tv=(TextView) arg1.findViewById(R.id.cartlistprice);
-                Toast.makeText(getApplicationContext(), "价格： "+tv.getText(), Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });*/
-        mListView.setOnLongClickListener(new View.OnLongClickListener(){
-            public boolean onLongClick(View view){
-                TextView tv=(TextView) view.findViewById(R.id.cartlistprice);
-                Toast.makeText(getApplicationContext(), "价格： "+tv.getText(), Toast.LENGTH_SHORT).show();
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final TextView tv=(TextView) view.findViewById(R.id.cartlistname);
+                //Toast.makeText(getApplicationContext(),tv.getText(),Toast.LENGTH_SHORT).show();
+                if(tv.getText().toString().equals("        购物车空空如也~")) return true;
+                AlertDialog.Builder builder=new AlertDialog.Builder(CartActivity.this);
+                builder.setTitle("移除商品");
+                builder.setMessage("从购物车中移除"+tv.getText()+"?");
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Doing Nothing
+                    }
+                });
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DataShare ds=((DataShare)getApplicationContext());
+                        ds.removeIncart(tv.getText().toString());
+                        initData();
+                        adapter.notifyDataSetChanged();
+                        Toast.makeText(getApplicationContext(),"商品"+tv.getText()+"移除成功",Toast.LENGTH_SHORT).show();
+                    }
+                });
                 return true;
             }
         });
     }
 
     public void initData(){
+        List<Map<String,Object>>Items=new ArrayList<Map<String,Object>>();
+        DataShare ds=((DataShare)getApplicationContext());
+        int len=0;
+        if(ds.getIncart()!=null) len=ds.getIncart().size();
         List<String> Name=new ArrayList<String>();
+        List<String> Price=new ArrayList<String>();
+        List<String> Iconletter=new ArrayList<String>();
+        if(len==0){
+            Map<String,Object> item=new HashMap<String,Object>();
+            item.put("iconletter","#");
+            item.put("name","        购物车空空如也~");//8个空格在前
+            item.put("price","    ");
+            Items.add(item);
+        }
+        else{
+            for(int i=0;i<len;i++){
+                Iconletter.add(ds.getIncart().get(i).substring(0,1));
+                Name.add(ds.getIncart().get(i));
+                Price.add(ds.getPrice().get(ds.getName().indexOf(ds.getIncart().get(i))));
+            }
+            for(int i=0;i<len;i++){
+                Map<String,Object> item=new HashMap<String,Object>();
+                item.put("iconletter",Iconletter.get(i));
+                item.put("name",Name.get(i));
+                item.put("price",Price.get(i));
+                Items.add(item);
+            }
+        }
+        //以下为本地初始化数据，activity间无通信
+        /*List<String> Name=new ArrayList<String>();
         List<String> Price=new ArrayList<String>();
         List<String> Iconletter=new ArrayList<String>();
         String[] name={"Enchated Forest","Arla Milk","Devondale Milk","Kindle Oasis","waitrose 早餐麦片",
@@ -78,14 +126,13 @@ public class CartActivity extends AppCompatActivity{
             Name.add(name[i]);
             Price.add(price[i]);
         }
-        List<Map<String,Object>>Items=new ArrayList<Map<String,Object>>();
         for(int i=0;i<10;i++){
             Map<String,Object> item=new HashMap<String,Object>();
             item.put("iconletter",Iconletter.get(i));
             item.put("name",Name.get(i));
             item.put("price",Price.get(i));
             Items.add(item);
-        }
+        }*/
         SimpleAdapter adapter=new SimpleAdapter(this,
                 Items,
                 R.layout.cart_item,
@@ -99,5 +146,7 @@ public class CartActivity extends AppCompatActivity{
         Intent newpage=new Intent(CartActivity.this,MainActivity.class);
         CartActivity.this.startActivity(newpage);
     }
+
+
 
 }

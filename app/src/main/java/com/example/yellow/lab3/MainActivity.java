@@ -31,19 +31,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MyAdapter mAdapter=new MyAdapter(this);
+        final MyAdapter mAdapter=new MyAdapter((DataShare)getApplicationContext());//this
         mAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent page=new Intent(MainActivity.this,ListViewActivity.class);
                 startActivity(page);
-                Toast.makeText(MainActivity.this, "CLICK", Toast.LENGTH_SHORT).show();
             }
         });
         mAdapter.setOnItemLongClickListener(new MyAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClick(View view, int position) {
-                Toast.makeText(MainActivity.this, "LONG_CLICK", Toast.LENGTH_SHORT).show();
+                TextView tv=(TextView)view.findViewById(R.id.goods_name);
+                DataShare ds=((DataShare)getApplicationContext());
+                ds.removeCurrentList(tv.getText().toString());
+                mAdapter.initData();
+                mAdapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(),"成功移除"+tv.getText(),Toast.LENGTH_SHORT).show();
             }
         });
 

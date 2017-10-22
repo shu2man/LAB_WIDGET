@@ -17,6 +17,13 @@ import java.util.List;
 public class ListViewActivity extends Activity {
     private ListView listView=null;
     private int favorflag=0;
+    private String name;
+    private String page;
+
+    public ListViewActivity(String name,String page){
+        this.name=name;
+        this.page=page;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

@@ -37,7 +37,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     private List<String> Details;
     private List<Boolean> isfavorite;
     private int favorflag;*/
-    private Context mcontext;
+    private DataShare ds;
 
     public interface OnItemClickListener{
         void onItemClick(View view,int position);
@@ -48,29 +48,31 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     private OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
 
-    public MyAdapter(Context context){
-        this.mcontext=context;
+    public MyAdapter(DataShare context){
+        ds=context;
         initData();
     }
-    private void initData() {
+    public void initData() {
         Name=new ArrayList<String>();
+        ds.getPrice();
+        Name=ds.getCurrentList();
         /*Price=new ArrayList<String>();
         Type=new ArrayList<String>();
         Details=new ArrayList<String>();
-        isfavorite=new ArrayList<Boolean>();*/
+        isfavorite=new ArrayList<Boolean>();
         String[] name={"Enchated Forest","Arla Milk","Devondale Milk","Kindle Oasis","Waitrose 早餐麦片",
                 "Mcvitie's 饼干","Ferrero Rocher","Maltesers","Lindt","Borggreve"};
-        /*String[] price={"¥5.00","¥59.00","¥79.00","¥2399.00","¥179.00","¥14.90","¥132.59","¥141.43","¥139.43","¥28.90"};
+        String[] price={"¥5.00","¥59.00","¥79.00","¥2399.00","¥179.00","¥14.90","¥132.59","¥141.43","¥139.43","¥28.90"};
         String[] type={"作者","产地","版本","版本","重量","重量","重量","重量","重量","重量"};
         String[] details={"Johanna Basford","德国","澳大利亚","8GB","2Kg","英国","300","118g","249g","640g"};
-        favorflag=0;*/
+        favorflag=0;
         for(int i=0;i<10;i++){
             Name.add(name[i]);
-            /*Price.add(price[i]);
+            Price.add(price[i]);
             Type.add(type[i]);
             Details.add(details[i]);
-            isfavorite.add(false);*/
-        }
+            isfavorite.add(false);
+        }*/
     }
     //创建ChildView
     @Override
@@ -126,9 +128,10 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
         this.mOnItemClickListener=mOnItemClickListener;
-    }
-    public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener){
-        this.mOnItemLongClickListener=mOnItemLongClickListener;
-    }
+   }
+
+   public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener){
+       this.mOnItemLongClickListener=mOnItemLongClickListener;
+   }
 
 }
