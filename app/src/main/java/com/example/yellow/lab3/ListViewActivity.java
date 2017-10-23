@@ -58,10 +58,12 @@ public class ListViewActivity extends Activity {
         if(ds.getLastPage().equals("main")){
             Intent newpage=new Intent(ListViewActivity.this,MainActivity.class);
             ListViewActivity.this.startActivity(newpage);
+            this.finish();
         }
         else{
             Intent newpage=new Intent(ListViewActivity.this,CartActivity.class);
             ListViewActivity.this.startActivity(newpage);
+            this.finish();
         }
     }
     public void setFavorite(View view){

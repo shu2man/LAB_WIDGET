@@ -39,7 +39,7 @@
             android:layout_alignBottom="@id/goods_image"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="15dp"
             />
         <TextView
             android:id="@+id/detail_page_name"
@@ -49,8 +49,7 @@
             android:textSize="20sp"
             android:textColor="@color/realDark"
             android:layout_alignStart="@id/detail_page_back"
-            android:layout_alignBottom="@id/detail_page_favorite"
-            />
+            android:layout_alignBottom="@id/detail_page_favorite" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -60,46 +59,53 @@
         android:layout_weight="2.00"
         android:orientation="horizontal"
         android:background="@drawable/item_background">
-        <LinearLayout
-            android:id="@+id/price_detail"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/p_d_c"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="16dp">
-            <TextView
-                android:id="@+id/price_textview"
+            android:background="@drawable/item_background">
+            <LinearLayout
+                android:id="@+id/price_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥132.59"
-                android:textColor="@color/realDark"
-                android:textSize="20sp"
-                android:layout_marginTop="8dp"/>
-            <TextView
-                android:id="@+id/type_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="重量 300g"
-                android:textSize="18sp"
-                android:textColor="@color/grayfordetailshow"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
-        <ImageButton
-            android:id="@+id/addtoshoppingcart"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/cart"
-            android:scaleType="centerInside"
-            android:background="@drawable/cart_bg"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="23dp"
-            android:layout_marginEnd="18dp"
-            android:onClick="addToCart"/>
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
+                <TextView
+                    android:id="@+id/price_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥132.59"
+                    android:textColor="@color/realDark"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"/>
+                <TextView
+                    android:id="@+id/type_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="重量 300g"
+                    android:textSize="14sp"
+                    android:textColor="@color/grayfordetailshow"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"/>
+            </LinearLayout>
+            <ImageButton
+                android:id="@+id/addtoshoppingcart"
+                android:layout_width="60dp"
+                android:layout_height="22dp"
+                android:src="@drawable/cart"
+                android:scaleType="centerInside"
+                android:background="@drawable/cart_bg"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="8dp"
+                android:onClick="addToCart" />
+        </RelativeLayout>
         <TextView
             android:id="@+id/more_intformation"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:text="更多产品信息"
-            android:layout_below="@id/price_detail"
+            android:layout_below="@id/p_d_c"
             android:textSize="18sp"
             android:textColor="@color/normalgray"
             android:paddingStart="16dp"

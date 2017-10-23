@@ -55,6 +55,7 @@ public class CartActivity extends AppCompatActivity{
                     ds.setLastPage("cart");
                     Intent newpage = new Intent(CartActivity.this, ListViewActivity.class);
                     CartActivity.this.startActivity(newpage);
+                    CartActivity.this.finish();
                 }
             }
         });
@@ -148,6 +149,7 @@ public class CartActivity extends AppCompatActivity{
     public void backToRecyclerView(View target){
         Intent newpage=new Intent(CartActivity.this,MainActivity.class);
         CartActivity.this.startActivity(newpage);
+        this.finish();
     }
 
 

@@ -10,7 +10,7 @@
                 android:width="1dp"
                 android:color="#B4B4B4"/>
             <padding
-                android:left="10dp"/>
+                android:left="10dp" />
         </shape>
     </item>
 </layer-list>

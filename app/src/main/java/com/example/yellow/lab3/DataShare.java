@@ -21,6 +21,7 @@ public class DataShare extends Application{
             R.drawable.mcvitie,R.drawable.ferrero,R.drawable.maltesers,R.drawable.lindt,R.drawable.borggreve};
     private String lastPage;
     private String lastClick;
+    private int mainNum=0;
 
    public DataShare(){
         Name=new ArrayList<String>();
@@ -41,7 +42,7 @@ public class DataShare extends Application{
             Details.add(details[i]);
         }
         CurrentList=Name;
-    }
+   }
 
     public List<String> getName(){
         return Name;
@@ -78,5 +79,8 @@ public class DataShare extends Application{
     public void removeIncart(String name){if(Incart.contains(name)) Incart.remove(name);}
     public void setLastPage(String page){lastPage=page;}
     public void setLastClick(String name){lastClick=name;}
-
+    public int getMainNum(){
+        mainNum+=1;
+        return mainNum;
+    }
 }

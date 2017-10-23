@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 DataShare ds=((DataShare)getApplicationContext());
                 ds.setLastClick(tv.getText().toString());
                 ds.setLastPage("main");
-                Intent page=new Intent(MainActivity.this,ListViewActivity.class);
-                startActivity(page);
+                goToListViewActivity();
             }
         });
         mAdapter.setOnItemLongClickListener(new MyAdapter.OnItemLongClickListener() {
@@ -68,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
    public void goToCart(View target){
         Intent page=new Intent(MainActivity.this,CartActivity.class);
         startActivity(page);
+        DataShare ds=((DataShare)getApplicationContext());
+        if(ds.getMainNum()!=1) this.finish();
+   }
+    public void goToListViewActivity(){
+        Intent page=new Intent(MainActivity.this,ListViewActivity.class);
+        startActivity(page);
+        DataShare ds=((DataShare)getApplicationContext());
+        if(ds.getMainNum()!=1) this.finish();
     }
 
 }
