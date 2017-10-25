@@ -105,11 +105,13 @@ public class CartActivity extends AppCompatActivity{
             Items.add(item);
         }
         else{
+            //从共享数据类读取数据
             for(int i=0;i<len;i++){
                 Iconletter.add(ds.getIncart().get(i).substring(0,1));
                 Name.add(ds.getIncart().get(i));
                 Price.add(ds.getPrice().get(ds.getName().indexOf(ds.getIncart().get(i))));
             }
+            //用读到的数据初始化哈希表
             for(int i=0;i<len;i++){
                 Map<String,Object> item=new HashMap<String,Object>();
                 item.put("iconletter",Iconletter.get(i));
@@ -138,10 +140,10 @@ public class CartActivity extends AppCompatActivity{
             Items.add(item);
         }*/
         SimpleAdapter adapter=new SimpleAdapter(this,
-                Items,
-                R.layout.cart_item,
-                new String[]{"iconletter","name","price"},
-                new int[]{R.id.cartlistcircle,R.id.cartlistname,R.id.cartlistprice});
+                Items,//数据源
+                R.layout.cart_item,//每一项的布局文件
+                new String[]{"iconletter","name","price"},//对应哈希表中的各项与下面布局中的各项对应关系
+                new int[]{R.id.cartlistcircle,R.id.cartlistname,R.id.cartlistprice});//
         mListView=(ListView) findViewById(R.id.cart_listview);
         mListView.setAdapter(adapter);
     }

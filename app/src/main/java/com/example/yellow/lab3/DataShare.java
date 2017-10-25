@@ -30,6 +30,7 @@ public class DataShare extends Application{
         Details=new ArrayList<String>();
         Favor=new ArrayList<String>();
         Incart=new ArrayList<String>();
+        CurrentList=new ArrayList<String>();
         String[] name={"Enchated Forest","Arla Milk","Devondale Milk","Kindle Oasis","waitrose 早餐麦片",
                 "Mcvitie's 饼干","Ferrero Rocher","Maltesers","Lindt","Borggreve"};
         String[] price={"¥5.00","¥59.00","¥79.00","¥2399.00","¥179.00","¥14.90","¥132.59","¥141.43","¥139.43","¥28.90"};
@@ -40,8 +41,8 @@ public class DataShare extends Application{
             Price.add(price[i]);
             Type.add(type[i]);
             Details.add(details[i]);
+            CurrentList.add(name[i]);
         }
-        CurrentList=Name;
    }
 
     public List<String> getName(){
@@ -67,7 +68,9 @@ public class DataShare extends Application{
     public int getIcon(int position){return Icon[position];}
     public Boolean isFavor(String name){ return Favor.contains(name);}
 
-    public void removeCurrentList(String name){if(CurrentList.contains(name)) CurrentList.remove(name);}
+    public void removeCurrentList(String name){
+        if(CurrentList.contains(name)) CurrentList.remove(name);
+    }
     public void setFavor(String name) {
         if(Favor.contains(name)) Favor.remove(name);
         else Favor.add(name);

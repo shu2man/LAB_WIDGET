@@ -32,21 +32,22 @@ import static android.R.id.list;
 
 class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     private List<String> Name;
+    private DataShare ds;
     /*private List<String> Price;
     private List<String> Type;
     private List<String> Details;
     private List<Boolean> isfavorite;
     private int favorflag;*/
-    private DataShare ds;
 
+    private OnItemClickListener mOnItemClickListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
     public interface OnItemClickListener{
         void onItemClick(View view,int position);
     }
     public interface OnItemLongClickListener{
         void onItemLongClick(View view,int position);
     }
-    private OnItemClickListener mOnItemClickListener;
-    private OnItemLongClickListener mOnItemLongClickListener;
+
 
     public MyAdapter(DataShare context){
         ds=context;
@@ -54,8 +55,8 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     }
     public void initData() {
         Name=new ArrayList<String>();
-        ds.getPrice();
         Name=ds.getCurrentList();
+        //ds.getPrice();
         /*Price=new ArrayList<String>();
         Type=new ArrayList<String>();
         Details=new ArrayList<String>();
@@ -92,8 +93,8 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
                 //为ItemView设置监听器
                 @Override
                 public void onClick(View v) {
-                    int position = holder.getLayoutPosition(); // 1
-                    mOnItemClickListener.onItemClick(holder.itemView,position); // 2
+                    int position = holder.getLayoutPosition();
+                    mOnItemClickListener.onItemClick(holder.itemView,position);
                 }
             });
         }
@@ -126,12 +127,11 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         }
     }
 
-   public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
         this.mOnItemClickListener=mOnItemClickListener;
-   }
-
-   public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener){
-       this.mOnItemLongClickListener=mOnItemLongClickListener;
-   }
+    }
+    public void setOnItemLongClickListener(OnItemLongClickListener mOnItemLongClickListener){
+        this.mOnItemLongClickListener=mOnItemLongClickListener;
+    }
 
 }

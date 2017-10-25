@@ -71,9 +71,8 @@ public class ListViewActivity extends Activity {
         ds.setFavor(ds.getLastClick());
         ImageButton favbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
         /*if(!ds.isFavor(ds.getLastClick())) favbtn.setBackgroundResource(R.drawable.empty_star);
-        else favbtn.setBackgroundResource(R.drawable.full_star);*/
-        initView(this);
-        //Toast.makeText(getApplicationContext(),"操作成功",Toast.LENGTH_SHORT).show();
+        else favbtn.setBackgroundResource(R.drawable.full_star);*///直接设置有bug
+        initView(this);//更新一下界面
     }
     public void addToCart(View taget){
         DataShare ds=((DataShare)getApplicationContext());

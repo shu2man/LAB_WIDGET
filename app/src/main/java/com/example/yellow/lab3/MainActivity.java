@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 DataShare ds=((DataShare)getApplicationContext());
                 ds.setLastClick(tv.getText().toString());
                 ds.setLastPage("main");
-                goToListViewActivity();
+                goToListViewActivity();//跳转到商品详情界面
             }
         });
         mAdapter.setOnItemLongClickListener(new MyAdapter.OnItemLongClickListener() {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         Intent page=new Intent(MainActivity.this,ListViewActivity.class);
         startActivity(page);
         DataShare ds=((DataShare)getApplicationContext());
-        if(ds.getMainNum()!=1) this.finish();
+        if(ds.getMainNum()!=1) this.finish();//待优化
     }
 
 }
