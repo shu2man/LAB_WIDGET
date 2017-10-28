@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/notification_icon"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@drawable/peanut2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        />
+    <LinearLayout
+        android:id="@+id/title_and_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/notification_icon"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="5dp">
+        <TextView
+            android:id="@+id/notification_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="马上下单"
+            android:textSize="16sp"
+            android:textColor="@color/circlewhite"/>
+        <TextView
+            android:id="@+id/notification_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxxxxxxxx已添加到购物车"
+            android:textSize="13sp" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/notification_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/devondale"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+    <TextView
+        android:id="@+id/notification_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/notification_img"
+        android:text="21:00"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        />
+
+</RelativeLayout>

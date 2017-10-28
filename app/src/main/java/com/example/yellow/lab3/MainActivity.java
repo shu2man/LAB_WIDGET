@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.OvershootInLeftAnimator;
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         //分割线
         mRecyclerView.addItemDecoration(new MyDecoration(this,MyDecoration.VERTICAL_LIST));
 
+        //第一次打开发推送
+        if(((DataShare)getApplicationContext()).getFirstin()){
+            randRecommend();
+        }
     }
 
    public void goToCart(View target){
@@ -71,10 +76,24 @@ public class MainActivity extends AppCompatActivity {
         if(ds.getMainNum()!=1) this.finish();
    }
     public void goToListViewActivity(){
-        Intent page=new Intent(MainActivity.this,ListViewActivity.class);
-        startActivity(page);
         DataShare ds=((DataShare)getApplicationContext());
+        Intent page=new Intent(MainActivity.this,ListViewActivity.class);
+        Bundle mBundle=new Bundle();
+        mBundle.putString("name",ds.getLastClick());
+        page.putExtras(mBundle);
+        startActivity(page);
         if(ds.getMainNum()!=1) this.finish();//待优化
+    }
+
+    public void randRecommend(){
+        DataShare ds=((DataShare)getApplicationContext());
+        Random random=new Random();
+        int recommend=random.nextInt(10);
+        Intent broadcastIntent=new Intent();//MainActivity.this,ListViewActivity.class
+        broadcastIntent.putExtra("package_name",ds.getName().get(recommend));
+        broadcastIntent.setAction("OnLaunchApp");
+        sendBroadcast(broadcastIntent);
+        ds.setLastClick(ds.getName().get(recommend));
     }
 
 }

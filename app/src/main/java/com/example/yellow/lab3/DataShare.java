@@ -19,9 +19,10 @@ public class DataShare extends Application{
     private List<String> CurrentList;
     private int[] Icon={R.drawable.enchatedforest,R.drawable.arla,R.drawable.devondale,R.drawable.kindle,R.drawable.waitrose,
             R.drawable.mcvitie,R.drawable.ferrero,R.drawable.maltesers,R.drawable.lindt,R.drawable.borggreve};
-    private String lastPage;
+    private String lastPage="main";
     private String lastClick;
     private int mainNum=0;
+    private boolean firstin=true;
 
    public DataShare(){
         Name=new ArrayList<String>();
@@ -77,13 +78,20 @@ public class DataShare extends Application{
     }
 
     public void addIncart(String name) {
-        if(!Incart.contains(name)) Incart.add(name);
-    }
+        Incart.add(name);
+    }//if(!Incart.contains(name))
     public void removeIncart(String name){if(Incart.contains(name)) Incart.remove(name);}
     public void setLastPage(String page){lastPage=page;}
     public void setLastClick(String name){lastClick=name;}
     public int getMainNum(){
         mainNum+=1;
         return mainNum;
+    }
+    public boolean getFirstin(){
+        if(firstin) {
+            firstin=false;
+            return true;
+        }
+        else return firstin;
     }
 }

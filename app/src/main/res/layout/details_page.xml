@@ -41,6 +41,12 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="15dp"
             />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@color/mytransparent"
+            android:layout_alignLeft="@id/detail_page_favorite"
+            android:onClick="myUnregister"/>
         <TextView
             android:id="@+id/detail_page_name"
             android:layout_width="wrap_content"
