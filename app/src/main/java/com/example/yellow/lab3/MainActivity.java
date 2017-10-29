@@ -86,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void randRecommend(){
-        DataShare ds=((DataShare)getApplicationContext());
+        DataShare ds=((DataShare)getApplicationContext());//数据共享类DataShare
         Random random=new Random();
         int recommend=random.nextInt(10);
-        Intent broadcastIntent=new Intent();//MainActivity.this,ListViewActivity.class
+        Intent broadcastIntent=new Intent();//广播发送的是Intent,先声明
         broadcastIntent.putExtra("package_name",ds.getName().get(recommend));
-        broadcastIntent.setAction("OnLaunchApp");
-        sendBroadcast(broadcastIntent);
+        broadcastIntent.setAction("OnLaunchApp");//设置标识动作
+        sendBroadcast(broadcastIntent);//发送广播
         ds.setLastClick(ds.getName().get(recommend));
     }
 

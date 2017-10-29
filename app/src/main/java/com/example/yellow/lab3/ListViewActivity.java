@@ -55,7 +55,7 @@ public class ListViewActivity extends Activity {
         return data;
     }
     public void initView(String name){
-        Toast.makeText(ListViewActivity.this, name, Toast.LENGTH_LONG).show();
+        //Toast.makeText(ListViewActivity.this, name, Toast.LENGTH_LONG).show();
         ImageButton favorbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
         ImageView imgiv=(ImageView) findViewById(R.id.goods_image);
         TextView nametv=(TextView) findViewById(R.id.detail_page_name);
@@ -128,6 +128,8 @@ public class ListViewActivity extends Activity {
         builder.setDefaults(Notification.DEFAULT_ALL);//设置全部
         builder.setAutoCancel(true);
         Notification notification=builder.build();//在此之后通过notification.(其他属性设置）同样可以设置通知效果
+        myManager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        myManager.notify(notificationid,notification);
 */
 
         //以下使用自定义通知栏,直接通知
@@ -154,8 +156,9 @@ public class ListViewActivity extends Activity {
         myManager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         myManager.notify(notificationid,notification);*/
 
+
         //以下通过注册动态广播实现
-        MBR=new DynamicReceiver();
+        MBR=new DynamicReceiver();//MBR为私有静态接收器，实现了一个按键来注销
         IntentFilter dynamic_filter=new IntentFilter();
         dynamic_filter.addAction("DYNAMIC_ACTION");
         registerReceiver(MBR,dynamic_filter);

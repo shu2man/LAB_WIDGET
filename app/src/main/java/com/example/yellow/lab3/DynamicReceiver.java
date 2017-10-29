@@ -19,7 +19,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class DynamicReceiver extends BroadcastReceiver {
     private NotificationManager myManager;
-    private int notificationid=2;
+    private int notificationid=1;
 
 
     @Override

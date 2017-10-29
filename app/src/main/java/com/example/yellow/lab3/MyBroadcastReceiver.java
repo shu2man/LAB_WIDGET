@@ -49,17 +49,17 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         rViews.setImageViewResource(R.id.notification_img,ds.getIcon(pos));
 
         Notification.Builder mbuilder=new Notification.Builder(context)
-                .setSmallIcon(ds.getIcon(pos))
-                .setTicker("商品热卖")
-                .setContentTitle("商品热卖中")
-                .setContentText(name+"仅售"+ds.getPrice().get(pos)+" ！")
-                .setContentIntent(ma)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setContent(rViews)
-                .setAutoCancel(true);
+                .setSmallIcon(ds.getIcon(pos)) //在使用自定义的布局后
+                .setTicker("商品热卖")        //这几个属性虽然没用
+                .setContentTitle("商品热卖中")//但不设置的话会报错
+                .setContentText(name+"仅售"+ds.getPrice().get(pos)+" ！")//同上
+                .setContentIntent(ma) //设置响应事件
+                .setDefaults(Notification.DEFAULT_ALL)//默认通知效果，铃声、振动等
+                .setContent(rViews)   //设置视图为自定义的布局
+                .setAutoCancel(true);//通知被点击后自动消失
         Notification notification=mbuilder.build();
         myManager=(NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        myManager.notify(notificationid,notification);
+        myManager.notify(notificationid,notification);//至此才显示出通知
     }
 
     public String getTime(){
