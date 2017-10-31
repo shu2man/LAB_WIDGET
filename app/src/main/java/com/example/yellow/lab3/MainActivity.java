@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         broadcastIntent.putExtra("package_name",ds.getName().get(recommend));
         broadcastIntent.setAction("OnLaunchApp");//设置标识动作
         sendBroadcast(broadcastIntent);//发送广播
-        ds.setLastClick(ds.getName().get(recommend));
+        ds.setLastClick(ds.getName().get(recommend));//
     }
 
 }

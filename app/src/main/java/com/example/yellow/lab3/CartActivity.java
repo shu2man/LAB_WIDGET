@@ -54,6 +54,9 @@ public class CartActivity extends AppCompatActivity{
                     ds.setLastClick(tv.getText().toString());
                     ds.setLastPage("cart");
                     Intent newpage = new Intent(CartActivity.this, ListViewActivity.class);
+                    Bundle mBundle=new Bundle();
+                    mBundle.putString("name",ds.getLastClick());
+                    newpage.putExtras(mBundle);
                     CartActivity.this.startActivity(newpage);
                     CartActivity.this.finish();
                 }

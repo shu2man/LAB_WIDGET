@@ -23,6 +23,7 @@ public class DataShare extends Application{
     private String lastClick;
     private int mainNum=0;
     private boolean firstin=true;
+    private int notiid=1;
 
    public DataShare(){
         Name=new ArrayList<String>();
@@ -94,4 +95,8 @@ public class DataShare extends Application{
         }
         else return firstin;
     }
+    public int getNotiid(){
+        return notiid++;
+    }
+
 }

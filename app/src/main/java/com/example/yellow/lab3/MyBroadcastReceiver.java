@@ -23,7 +23,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
     private NotificationManager myManager;
-    private int notificationid=2;
+    private int notificationid=1;
 
     @Override
     public void onReceive(Context context,Intent intent){
@@ -36,11 +36,11 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         DataShare ds=((DataShare)context.getApplicationContext());
         int pos=ds.getName().indexOf(name);
         myManager=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent intent=new Intent(context,ListViewActivity.class);
         Bundle mBundle=new Bundle();
         mBundle.putString("name",name);
+        Intent intent=new Intent(context,ListViewActivity.class);
         intent.putExtras(mBundle);
-        PendingIntent ma=PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent ma=PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         RemoteViews rViews=new RemoteViews(context.getPackageName(),R.layout.notification_view);
         rViews.setImageViewResource(R.id.notification_icon,R.drawable.peanut2);
         rViews.setTextViewText(R.id.notification_title,"商品热卖中");
@@ -59,7 +59,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                 .setAutoCancel(true);//通知被点击后自动消失
         Notification notification=mbuilder.build();
         myManager=(NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        myManager.notify(notificationid,notification);//至此才显示出通知
+        myManager.notify(ds.getNotiid(),notification);//至此才显示出通知
     }
 
     public String getTime(){

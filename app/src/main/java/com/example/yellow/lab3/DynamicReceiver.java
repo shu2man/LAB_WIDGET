@@ -19,7 +19,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class DynamicReceiver extends BroadcastReceiver {
     private NotificationManager myManager;
-    private int notificationid=1;
+    private int notificationid=2;
 
 
     @Override
@@ -39,7 +39,7 @@ public class DynamicReceiver extends BroadcastReceiver {
         notiView.setImageViewResource(R.id.notification_img,ds.getIcon(ds.getName().indexOf(ds.getLastClick())));
 
         Intent intent=new Intent(context,CartActivity.class);
-        PendingIntent ma=PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent ma=PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Builder mbuilder=new Notification.Builder(context)
                 .setSmallIcon(ds.getIcon(ds.getName().indexOf(ds.getLastClick())))
                 .setTicker("抢先下单")
@@ -51,7 +51,7 @@ public class DynamicReceiver extends BroadcastReceiver {
                 .setAutoCancel(true);
         Notification notification=mbuilder.build();
         myManager=(NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-        myManager.notify(notificationid,notification);
+        myManager.notify(ds.getNotiid(),notification);
 
     }
 

@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".DataShare">
-        <activity android:name=".MainActivity"
-            android:launchMode="singleInstance">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

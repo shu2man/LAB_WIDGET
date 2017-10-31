@@ -30,7 +30,7 @@ import java.util.List;
 
 public class ListViewActivity extends Activity {
     private ListView listView=null;
-
+    private String name;
     private NotificationManager myManager;
     private  int notificationid=1;
 
@@ -41,8 +41,14 @@ public class ListViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_page);
         Bundle mBundle=getIntent().getExtras();
-        String name=mBundle.getString("name");
-        initView(name);//findviewbyid必须在setContentView之后否则出现空指针错误
+        name=mBundle.getString("name");
+        initView();//findviewbyid必须在setContentView之后否则出现空指针错误
+
+        MBR=new DynamicReceiver();//MBR为私有静态接收器，实现了一个按键来注销
+        IntentFilter dynamic_filter=new IntentFilter();
+        dynamic_filter.addAction("DYNAMIC_ACTION");
+        registerReceiver(MBR,dynamic_filter);
+
         listView=(ListView) findViewById(R.id.listview_in_detail_page);
         listView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,getData()));
     }
@@ -54,9 +60,9 @@ public class ListViewActivity extends Activity {
         data.add("查看更多商品促销信息");
         return data;
     }
-    public void initView(String name){
-        //Toast.makeText(ListViewActivity.this, name, Toast.LENGTH_LONG).show();
-        ImageButton favorbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
+    public void initView(){//String name
+        Toast.makeText(ListViewActivity.this, name, Toast.LENGTH_LONG).show();
+        /*ImageButton favorbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
         ImageView imgiv=(ImageView) findViewById(R.id.goods_image);
         TextView nametv=(TextView) findViewById(R.id.detail_page_name);
         TextView pricetv=(TextView) findViewById(R.id.price_textview);
@@ -68,8 +74,8 @@ public class ListViewActivity extends Activity {
         imgiv.setImageResource(ds.getIcon(pos));
         nametv.setText(ds.getLastClick());
         pricetv.setText(ds.getPrice().get(pos));
-        detailtv.setText(ds.getType().get(pos)+" "+ds.getDetails().get(pos));
-        /*ImageButton favorbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
+        detailtv.setText(ds.getType().get(pos)+" "+ds.getDetails().get(pos));*/
+        ImageButton favorbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
         ImageView imgiv=(ImageView) findViewById(R.id.goods_image);
         TextView nametv=(TextView) findViewById(R.id.detail_page_name);
         TextView pricetv=(TextView) findViewById(R.id.price_textview);
@@ -81,7 +87,7 @@ public class ListViewActivity extends Activity {
         imgiv.setImageResource(ds.getIcon(pos));
         nametv.setText(name);
         pricetv.setText(ds.getPrice().get(pos));
-        detailtv.setText(ds.getType().get(pos)+" "+ds.getDetails().get(pos));*/
+        detailtv.setText(ds.getType().get(pos)+" "+ds.getDetails().get(pos));
     }
     public void backToLastPage(View target){
         DataShare ds=((DataShare)getApplicationContext());
@@ -102,7 +108,7 @@ public class ListViewActivity extends Activity {
         ImageButton favbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
         /*if(!ds.isFavor(ds.getLastClick())) favbtn.setBackgroundResource(R.drawable.empty_star);
         else favbtn.setBackgroundResource(R.drawable.full_star);*///直接设置有bug
-        initView(ds.getLastClick());//更新一下界面
+        initView();//更新一下界面,ds.getLastClick()
     }
     public void addToCart(View taget){
         DataShare ds=((DataShare)getApplicationContext());
@@ -158,10 +164,6 @@ public class ListViewActivity extends Activity {
 
 
         //以下通过注册动态广播实现
-        MBR=new DynamicReceiver();//MBR为私有静态接收器，实现了一个按键来注销
-        IntentFilter dynamic_filter=new IntentFilter();
-        dynamic_filter.addAction("DYNAMIC_ACTION");
-        registerReceiver(MBR,dynamic_filter);
         Intent broadcastIntent=new Intent();
         broadcastIntent.putExtra("package_name",ds.getLastClick());
         broadcastIntent.setAction("DYNAMIC_ACTION");
@@ -178,6 +180,7 @@ public class ListViewActivity extends Activity {
     public void myUnregister(View view){
         if(MBR!=null){
             unregisterReceiver(MBR);
+            Toast.makeText(ListViewActivity.this, "接收器已注销", Toast.LENGTH_SHORT).show();
         }
     }
 
