@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -35,6 +36,7 @@ public class ListViewActivity extends Activity {
     private  int notificationid=1;
 
     private DynamicReceiver MBR;
+    private MyWidget DynamicWidget;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -62,19 +64,6 @@ public class ListViewActivity extends Activity {
     }
     public void initView(){//String name
         Toast.makeText(ListViewActivity.this, name, Toast.LENGTH_LONG).show();
-        /*ImageButton favorbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
-        ImageView imgiv=(ImageView) findViewById(R.id.goods_image);
-        TextView nametv=(TextView) findViewById(R.id.detail_page_name);
-        TextView pricetv=(TextView) findViewById(R.id.price_textview);
-        TextView detailtv=(TextView) findViewById(R.id.type_textview);
-        DataShare ds=((DataShare)getApplicationContext());
-        int pos=ds.getName().indexOf(ds.getLastClick());
-        if (ds.isFavor(ds.getLastClick())) favorbtn.setImageResource(R.drawable.full_star);
-        else favorbtn.setImageResource(R.drawable.empty_star);
-        imgiv.setImageResource(ds.getIcon(pos));
-        nametv.setText(ds.getLastClick());
-        pricetv.setText(ds.getPrice().get(pos));
-        detailtv.setText(ds.getType().get(pos)+" "+ds.getDetails().get(pos));*/
         ImageButton favorbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
         ImageView imgiv=(ImageView) findViewById(R.id.goods_image);
         TextView nametv=(TextView) findViewById(R.id.detail_page_name);
@@ -106,8 +95,6 @@ public class ListViewActivity extends Activity {
         DataShare ds=((DataShare)getApplicationContext());
         ds.setFavor(ds.getLastClick());
         ImageButton favbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
-        /*if(!ds.isFavor(ds.getLastClick())) favbtn.setBackgroundResource(R.drawable.empty_star);
-        else favbtn.setBackgroundResource(R.drawable.full_star);*///直接设置有bug
         initView();//更新一下界面,ds.getLastClick()
     }
     public void addToCart(View taget){
@@ -115,59 +102,11 @@ public class ListViewActivity extends Activity {
         ds.addIncart(ds.getLastClick());
         Toast.makeText(ListViewActivity.this, "商品已添加到购物车", Toast.LENGTH_SHORT).show();
 
-        /*
-        //以下使用系统默认通知，在各厂商UI下效果不一致
-        Notification.Builder builder=new Notification.Builder(ListViewActivity.this);
-        builder.setSmallIcon(ds.getIcon(ds.getName().indexOf(ds.getLastClick())));
-        //builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),
-                ds.getIcon(ds.getName().indexOf(ds.getLastClick()))));
-        builder.setTicker("抢先下单");
-        builder.setContentTitle("马上下单");
-        builder.setContentText(ds.getLastClick()+"已添加到购物车");
-        Intent intent=new Intent(ListViewActivity.this,CartActivity.class);
-        PendingIntent ma=PendingIntent.getActivity(ListViewActivity.this,0,intent,PendingIntent.FLAG_ONE_SHOT);
-        builder.setContentIntent(ma);
-        //builder.setDefaults(Notification.DEFAULT_SOUND);//设置声音 
-        //builder.setDefaults(Notification.DEFAULT_LIGHTS);//设置指示灯 
-        //builder.setDefaults(Notification.DEFAULT_VIBRATE);//设置震动
-        builder.setDefaults(Notification.DEFAULT_ALL);//设置全部
-        builder.setAutoCancel(true);
-        Notification notification=builder.build();//在此之后通过notification.(其他属性设置）同样可以设置通知效果
-        myManager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        myManager.notify(notificationid,notification);
-*/
-
-        //以下使用自定义通知栏,直接通知
-        /*RemoteViews notiView=new RemoteViews(getPackageName(),R.layout.notification_view);
-        notiView.setImageViewResource(R.id.notification_icon,R.drawable.peanut2);
-        notiView.setTextViewText(R.id.notification_title,"马上下单");
-        notiView.setTextViewText(R.id.notification_text,ds.getLastClick()+"已添加到购物车");
-        notiView.setTextViewText(R.id.notification_time,getTime());
-        notiView.setImageViewResource(R.id.notification_img,ds.getIcon(ds.getName().indexOf(ds.getLastClick())));
-
-        Intent intent=new Intent(ListViewActivity.this,CartActivity.class);
-        PendingIntent ma=PendingIntent.getActivity(ListViewActivity.this,0,intent,PendingIntent.FLAG_ONE_SHOT);
-        Notification.Builder mbuilder=new Notification.Builder(ListViewActivity.this)
-                .setSmallIcon(ds.getIcon(ds.getName().indexOf(ds.getLastClick())))
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), ds.getIcon(ds.getName().indexOf(ds.getLastClick()))))
-                .setTicker("抢先下单")
-                .setContentTitle("马上下下单")
-                .setContentText(ds.getLastClick()+"已添加到购物车")
-                .setContentIntent(ma)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setContent(notiView)
-                .setAutoCancel(true);
-        Notification notification=mbuilder.build();
-        myManager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        myManager.notify(notificationid,notification);*/
-
-
         //以下通过注册动态广播实现
-        Intent broadcastIntent=new Intent();
-        broadcastIntent.putExtra("package_name",ds.getLastClick());
-        broadcastIntent.setAction("DYNAMIC_ACTION");
-        sendBroadcast(broadcastIntent);
+        Intent broadcastIntent1=new Intent();
+        broadcastIntent1.putExtra("package_name",ds.getLastClick());
+        broadcastIntent1.setAction("DYNAMIC_ACTION");
+        sendBroadcast(broadcastIntent1);
 
     }
 
@@ -180,7 +119,11 @@ public class ListViewActivity extends Activity {
     public void myUnregister(View view){
         if(MBR!=null){
             unregisterReceiver(MBR);
-            Toast.makeText(ListViewActivity.this, "接收器已注销", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ListViewActivity.this, "接收器1已注销", Toast.LENGTH_SHORT).show();
+        }
+        if(DynamicWidget!=null){
+            unregisterReceiver(DynamicWidget);
+            Toast.makeText(ListViewActivity.this, "接收器2已注销", Toast.LENGTH_SHORT).show();
         }
     }
 

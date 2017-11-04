@@ -64,8 +64,12 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
     public String getTime(){
         Calendar cal=Calendar.getInstance();
-        String time=cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
-        return time;
+        String time="";
+        if(cal.get(Calendar.HOUR_OF_DAY)<10) time="0";
+        time=time+cal.get(Calendar.HOUR_OF_DAY)+":";
+        if(cal.get(Calendar.MINUTE)<10) time=time+"0";
+        time=time+cal.get(Calendar.MINUTE);
+        return time;//返回xx:xx格式的时间
     }
 }
 
