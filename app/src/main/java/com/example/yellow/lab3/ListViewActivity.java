@@ -63,7 +63,7 @@ public class ListViewActivity extends Activity {
         return data;
     }
     public void initView(){//String name
-        Toast.makeText(ListViewActivity.this, name, Toast.LENGTH_LONG).show();
+        //Toast.makeText(ListViewActivity.this, name, Toast.LENGTH_LONG).show();
         ImageButton favorbtn=(ImageButton)findViewById(R.id.detail_page_favorite);
         ImageView imgiv=(ImageView) findViewById(R.id.goods_image);
         TextView nametv=(TextView) findViewById(R.id.detail_page_name);
